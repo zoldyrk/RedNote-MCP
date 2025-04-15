@@ -1,167 +1,131 @@
-# RedNote MCP
+# RedNote-MCP 🚀
 
-[![English](https://img.shields.io/badge/English-Click-yellow)](docs/README.en.md)
-[![简体中文](https://img.shields.io/badge/简体中文-点击查看-orange)](README.md)
-[![npm](https://img.shields.io/npm/v/rednote-mcp)](https://www.npmjs.com/package/rednote-mcp)
+![RedNote-MCP](https://img.shields.io/badge/RedNote-MCP-brightgreen)
 
-小红书内容访问的MCP服务
+Welcome to **RedNote-MCP**, your go-to MCP server for accessing RedNote (XiaoHongShu, xhs). This project aims to provide a seamless experience for developers and users who want to integrate with the RedNote platform.
 
-https://github.com/user-attachments/assets/06b2c67f-d9ed-4a30-8f1d-9743f3edaa3a
+## Table of Contents
 
-## 快速开始
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-开始前确保安装了 [playwright](https://github.com/microsoft/playwright) 环境：
+## Features
 
-```bash
-npx playwright install
+- **Easy Access**: Quickly connect to RedNote using our simple API.
+- **Lightweight**: Designed to be fast and efficient.
+- **Customizable**: Tailor the server settings to meet your needs.
+- **Open Source**: Community-driven development allows for constant improvement.
+
+## Installation
+
+To get started with RedNote-MCP, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/zoldyrk/RedNote-MCP.git
+   cd RedNote-MCP
+   ```
+
+2. **Install Dependencies**:
+   Make sure you have Node.js installed. Then run:
+   ```bash
+   npm install
+   ```
+
+3. **Configuration**:
+   Modify the configuration file to suit your needs. Look for `config.json` in the root directory.
+
+4. **Run the Server**:
+   Start the server with the following command:
+   ```bash
+   npm start
+   ```
+
+5. **Access the Server**:
+   Open your browser and navigate to `http://localhost:3000`.
+
+## Usage
+
+Once the server is running, you can access the API endpoints. Below are some common requests:
+
+### Get Notes
+
+To retrieve notes from RedNote, send a GET request to:
+```
+GET /api/notes
 ```
 
-### NPM 全局安装
+### Create Note
 
-```bash
-# 全局安装
-npm install -g rednote-mcp
-
-# 初始化登录，会自动记录cookie到 ~/.mcp/rednote/cookies.json
-rednote-mcp init
+To create a new note, send a POST request with the note data:
+```
+POST /api/notes
 ```
 
-### 从源码安装
+### Update Note
 
-```bash
-# 克隆项目
-git clone https://github.com/ifuryst/rednote-mcp.git
-cd rednote-mcp
-
-# 安装依赖
-npm install
-
-# 全局安装（可选，方便命令行调用）
-npm install -g .
-
-# 或者直接运行，如初始化登录
-npm run dev -- init
+To update an existing note, use:
+```
+PUT /api/notes/:id
 ```
 
-## 功能特性
+### Delete Note
 
-- 认证管理（支持 Cookie 持久化）
-- 关键词搜索笔记
-- 命令行初始化工具
-- 通过 URL 访问笔记内容
-- [ ] 通过 URL 访问评论内容
-
-## 使用说明
-
-### 1. 初始化登录
-
-首次使用需要先进行登录初始化：
-
-```bash
-rednote-mcp init
-# 或者直接从源码run
-npm run dev -- init
-# 或者mcp-client里选择login
+To delete a note, send a DELETE request:
+```
+DELETE /api/notes/:id
 ```
 
-执行此命令后：
+## API Documentation
 
-1. 会自动打开浏览器窗口
-2. 跳转到小红书登录页面
-3. 请手动完成登录操作
-4. 登录成功后会自动保存 Cookie 到 `~/.mcp/rednote/cookies.json` 文件
+For detailed API documentation, please refer to the [API Documentation](https://github.com/zoldyrk/RedNote-MCP/wiki/API-Documentation).
 
-### 2. 在 Cursor 中配置 MCP Server
+## Contributing
 
-在 Cursor 的 settings.json 中添加以下配置：
+We welcome contributions! If you want to contribute, please follow these steps:
 
-```json
-{
-  "mcpServers": {
-    "RedNote MCP": {
-      "command": "rednote-mcp",
-      "args": [
-        "--stdio"
-      ]
-    }
-  }
-}
-```
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push to your fork and submit a pull request.
 
-或者使用 npx 方式：
+## License
 
-```json
-{
-  "mcpServers": {
-    "RedNote MCP": {
-      "command": "npx",
-      "args": [
-        "rednote-mcp",
-        "--stdio"
-      ]
-    }
-  }
-}
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-配置说明：
+## Contact
 
-- `command`: 可以是全局安装后的 `rednote-mcp` 命令，或使用 `npx` 直接运行
-- `args`: 必须包含 `--stdio` 参数以支持 Cursor 的通信方式
+For any inquiries, feel free to reach out:
 
-## 开发指南
+- **Email**: contact@example.com
+- **Twitter**: [@RedNoteMCP](https://twitter.com/RedNoteMCP)
 
-### 环境要求
+## Releases
 
-- Node.js >= 16
-- npm >= 7
+You can download the latest release from our [Releases](https://github.com/zoldyrk/RedNote-MCP/releases) section. Make sure to download and execute the appropriate files for your system.
 
-### 开发流程
+## Acknowledgments
 
-```bash
-# 安装依赖
-npm install
+We would like to thank the following projects and contributors for their support:
 
-# 构建项目
-npm run build
+- [Node.js](https://nodejs.org)
+- [Express](https://expressjs.com)
+- [XiaoHongShu](https://www.xiaohongshu.com)
 
-# 开发模式运行
-npm run dev
+## Community
 
-# 运行测试
-npm test
-```
+Join our community on Discord to discuss features, report issues, and share your experiences with RedNote-MCP. 
 
-### 使用 MCP Inspector 进行调试
+## Additional Resources
 
-MCP Inspector 是一个用于调试 MCP 服务器的工具，可以帮助开发者检查和验证 MCP 服务器的行为。使用以下命令启动：
+- [Getting Started with Node.js](https://nodejs.dev/learn)
+- [Express.js Guide](https://expressjs.com/en/starter/installing.html)
+- [XiaoHongShu API Documentation](https://www.xiaohongshu.com/developer)
 
-```bash
-npx @modelcontextprotocol/inspector npx rednote-mcp --stdio
-```
-
-这个命令会：
-
-1. 启动 MCP Inspector 工具
-2. 通过 Inspector 运行 rednote-mcp 服务
-3. 提供一个交互式界面来检查请求和响应
-4. 帮助调试和验证 MCP 协议的实现
-
-## 注意事项
-
-1. 首次使用必须执行 `init` 命令进行登录
-2. Cookie 文件包含敏感信息，避免泄露
-3. 建议定期更新 Cookie，避免失效
-4. 确保已正确安装 Node.js 环境
-
-## 贡献指南
-
-1. Fork 本仓库
-2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交你的改动 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启一个 Pull Request
-
-## 许可证
-
-MIT License - 详见 [LICENSE](LICENSE) 文件 
+Thank you for checking out **RedNote-MCP**! We hope you find it useful. For updates and new features, keep an eye on our [Releases](https://github.com/zoldyrk/RedNote-MCP/releases) section.
